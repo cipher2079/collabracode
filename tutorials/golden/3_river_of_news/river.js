@@ -6,11 +6,21 @@ function log(s) {
   }
 }
 
-function loadRemoteRSSHandler(evt) {
+function loadRemoteRSSHandler() {
+	$.ajax({
+		url: REMOTE_URL,
+		success: 
+				//If the JQuery call works, do this...
+				function(results){
+						console.log(results);
+						}
+		});
+	
   loadRemoteRSS(riverCallback);
 }
-
+/*
 function loadRemoteRSS(callback) {
+
   if(!callback) {
     callback = riverCallback;
   }
@@ -42,7 +52,7 @@ function loadRemoteRSS(callback) {
   };
   req.send(null);
 }
-
+*/
 function attachButtonEvents() {
   var elem = document.getElementById("run-load-river-button");
   if(elem) {
