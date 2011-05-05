@@ -5,7 +5,99 @@
         <style type="text/css" media="screen">
             #comment_form { width: 400px; margin: 10px auto; }
             #comment { height: 70px;}
-        </style>
+			.error {
+				color:red;
+				font-size:20px;
+				display:none;
+				}
+			.show{
+				display:block;
+				}
+				</style>
+        <script type="text/javascript" src="jquery-1.3.2.js"></script>
+<script type="text/javascript">
+
+$("document").ready(function() {
+function checkform(){
+	$("#name").each(function(idx, elem) {
+		if ($(elem).val() === "")
+        //if(document.getElementById("name").value == '')
+		{
+			$('#nameInput').addClass("show");
+			//alert("enter correct format");
+    		//alert($(elem).attr('name') + ' cannot be blank.');
+            failed = true;
+		}
+		
+	});
+	};
+	$('#submit').bind('click', checkform);
+	
+	function checkEmail(){
+	//$('input').each(function(idx, elem) {
+		if (!$('#email').val().match(/@/)) 
+        //if(document.getElementById("name").value == '')
+		{
+			$('#emailInput').addClass("show");
+			
+			//alert("enter correct Email format");
+    		//alert($(elem).attr('name') + ' cannot be blank.');
+            failed = true;
+		}
+		
+	//});
+	};
+	$('#submit').bind('click', checkEmail);
+	
+	function checkComment(){
+	//$('input').each(function(idx, elem) {
+		if ($('textarea').val().length < 10) 
+        //if(document.getElementById("name").value == '')
+		{
+			$('#commentInput').addClass("show");
+			//alert("You call that a comment!");
+    		//alert($(elem).attr('name') + ' cannot be blank.');
+            failed = true;
+		}
+		
+	//});
+	};
+	$('#submit').bind('click', checkComment);
+	
+	function clearForm(){
+	//return this.each(function() {
+	$('input , textArea').each(function(idx, elem) {
+    // iterate the elements within the form
+    $(this).val("");
+  });
+};
+	
+$('#clear').bind('click', clearForm);
+//clearForm();
+//first were are going to creat a function ath gets tahe comment  boject
+
+var commentBox = $("#comment");
+
+//here we will creat an eventhandler taht will ask comment to do something
+
+commentBox.keyup(
+
+function(){
+	
+	//console.log("hello");
+	
+	var leng = commentBox.val().length;
+	
+	$("#warningLabel").text(leng);	
+	
+	}
+
+);	
+
+//once the eventhandler is process now we will check the lenght of the value inside the texterear
+
+});
+</script>
     </head> 
     <body> 
         <div id="outer-wrapping">
@@ -28,17 +120,22 @@
                         <textarea name="comment" id="comment"></textarea><br />
                     </div>
                     
+                     <div id="warningLabel"></div>
+                                            
                     <label for="name">Name:</label><br />
                     <input type="text" name="name" id="name" /><br />
                     <br />
                     
                     <label for="email">Email Address:</label><br />
-                    <input type="text" name="email" id="name" /><br />
+                    <input type="text" name="email" id="email" /><br />
                     <br />
                     
                     <div style="clear: both"></div>
-                    <button id="submit" type="button">Submit</button>&nbsp;&nbsp;<a id="clear" href="#">clear</a>
+                    <button id="submit" type="button">SubmitTEXT</button>&nbsp;&nbsp;<a id="clear" href="#">clear</a>
                 </fieldset>
+                <p class="error" id="nameInput">There were errors on the form, please make sure all fields are fill out correctly.</p>
+                <p class="error" id="emailInput">Please enter correct email format.</p>
+                <p class="error" id="commentInput">You called that a comment!.</p>
             </form>
             <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
         </div>
